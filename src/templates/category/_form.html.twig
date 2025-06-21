@@ -1,4 +1,4 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-success btn-sm">{{ button_label|default('Save') }}</button>
+    {{ form_row(form.category, {'label': 'Categoria'}) }}
+    <button class="btn btn-success btn-sm">{{ button_label|default('Guardar') }}</button>
 {{ form_end(form) }}

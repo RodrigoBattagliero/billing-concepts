@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New IvaApplication{% endblock %}
+{% block title %}Aplicación de IVA{% endblock %}
 
 {% block body %}
-    <h1>Create new IvaApplication</h1>
+    <h1>Crear Aplicación de IVA</h1>
 
     {{ include('iva_application/_form.html.twig') }}
 
-    <a href="{{ path('app_iva_application_index') }}" class="btn btn-secondary">back to list</a>
+    <a href="{{ path('app_iva_application_index') }}" class="btn btn-primary">Volver al listado</a>
 {% endblock %}

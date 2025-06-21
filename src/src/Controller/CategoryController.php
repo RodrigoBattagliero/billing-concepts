@@ -6,10 +6,11 @@ use App\Entity\Category;
 use App\Form\CategoryForm;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 
 #[Route('/category')]
 final class CategoryController extends AbstractController
@@ -32,6 +33,8 @@ final class CategoryController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($category);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Categoria creada correctamente.');
 
             return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -58,6 +61,7 @@ final class CategoryController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
+            $this->addFlash('success', 'Categoria editada correctamente.');
 
             return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -72,8 +76,17 @@ final class CategoryController extends AbstractController
     public function delete(Request $request, Category $category, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($category);
-            $entityManager->flush();
+
+            try {
+                $entityManager->remove($category);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'Categoria eliminada correctamente.');
+
+            } catch (ForeignKeyConstraintViolationException $e) {
+                $this->addFlash('error', 'No se puede eliminar la categoria porque tiene productos o servicios relacionados.');
+            }
+            
         }
 
         return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);

@@ -1,39 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}IvaApplication index{% endblock %}
+{% block title %}IVA{% endblock %}
 
 {% block body %}
-    <h1>IvaApplication index</h1>
+    <h1>IVA</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Code</th>
-                <th>IvaApplication</th>
-                <th>Aliquot</th>
-                <th>actions</th>
+                <th>Código</th>
+                <th>Aplicación IVA</th>
+                <th>Alícuota</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
         {% for iva_application in iva_applications %}
             <tr>
-                <td>{{ iva_application.id }}</td>
                 <td>{{ iva_application.code }}</td>
                 <td>{{ iva_application.ivaApplication }}</td>
                 <td>{{ iva_application.aliquot }}</td>
                 <td>
-                    <a href="{{ path('app_iva_application_show', {'id': iva_application.id}) }}">show</a>
-                    <a href="{{ path('app_iva_application_edit', {'id': iva_application.id}) }}">edit</a>
+                    <a href="{{ path('app_iva_application_show', {'id': iva_application.id}) }}" class="btn btn-info btn-sm">Ver</a>
+                    <a href="{{ path('app_iva_application_edit', {'id': iva_application.id}) }}" class="btn btn-secondary btn-sm">Editar</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">No se encontraron registros</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_iva_application_new') }}">Create new</a>
+    <a href="{{ path('app_iva_application_new') }}" class="btn btn-primary btn-sm">Crear nuevo</a>
 {% endblock %}

@@ -4,12 +4,13 @@ namespace App\Controller;
 
 use App\Entity\IvaApplication;
 use App\Form\IvaApplicationForm;
-use App\Repository\IvaApplicationRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\IvaApplicationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 
 #[Route('/iva-application')]
 final class IvaApplicationController extends AbstractController
@@ -26,7 +27,7 @@ final class IvaApplicationController extends AbstractController
     public function new(
         Request $request, 
         EntityManagerInterface $entityManager,
-        
+
     ): Response
     {
         $ivaApplication = new IvaApplication();
@@ -36,6 +37,7 @@ final class IvaApplicationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($ivaApplication);
             $entityManager->flush();
+            $this->addFlash('success', 'IVA creada correctamente.');
 
             return $this->redirectToRoute('app_iva_application_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -63,6 +65,8 @@ final class IvaApplicationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            $this->addFlash('success', 'IVA editada correctamente.');
+
             return $this->redirectToRoute('app_iva_application_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -76,8 +80,16 @@ final class IvaApplicationController extends AbstractController
     public function delete(Request $request, IvaApplication $ivaApplication, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$ivaApplication->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($ivaApplication);
-            $entityManager->flush();
+
+            try {
+                $entityManager->remove($ivaApplication);
+                $entityManager->flush();
+    
+                $this->addFlash('success', 'IVA eliminada correctamente.');
+            } catch (ForeignKeyConstraintViolationException $e) {
+                $this->addFlash('error', 'No se puede eliminar el IVA porque tiene productos o servicios relacionados.');
+                
+            }
         }
 
         return $this->redirectToRoute('app_iva_application_index', [], Response::HTTP_SEE_OTHER);

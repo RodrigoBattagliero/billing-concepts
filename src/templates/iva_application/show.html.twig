@@ -1,34 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}IvaApplication{% endblock %}
+{% block title %}Aplicación IVA{% endblock %}
 
 {% block body %}
-    <h1>IvaApplication</h1>
+    <h1>Aplicación IVA</h1>
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ iva_application.id }}</td>
-            </tr>
-            <tr>
-                <th>Code</th>
+                <th>Código</th>
                 <td>{{ iva_application.code }}</td>
             </tr>
             <tr>
-                <th>IvaApplication</th>
+                <th>IVA</th>
                 <td>{{ iva_application.ivaApplication }}</td>
             </tr>
             <tr>
-                <th>Aliquot</th>
+                <th>Alícouta</th>
                 <td>{{ iva_application.aliquot }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_iva_application_index') }}">back to list</a>
+    <a href="{{ path('app_iva_application_index') }}" class="btn btn-primary btn-sm">Volver al listado</a>
 
-    <a href="{{ path('app_iva_application_edit', {'id': iva_application.id}) }}">edit</a>
+    <a href="{{ path('app_iva_application_edit', {'id': iva_application.id}) }}" class="btn btn-secondary btn-sm">edit</a>
 
     {{ include('iva_application/_delete_form.html.twig') }}
 {% endblock %}

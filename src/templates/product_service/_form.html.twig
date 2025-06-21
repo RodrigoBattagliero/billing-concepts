@@ -1,4 +1,10 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_row(form.type, {'label': 'Tipo'}) }}
+    {{ form_row(form.category, {'label': 'Categoria'}) }}
+    {{ form_row(form.code, {'label': 'Code'}) }}
+    {{ form_row(form.productService, {'label': 'Producto/Servicio'}) }}
+    {{ form_row(form.unitMeasurement, {'label': 'Unida de medida'}) }}
+    {{ form_row(form.ivaApplication, {'label': 'IVA'}) }}
+    {{ form_row(form.grossPrice, {'label': 'Precio'}) }}
+    <button class="btn btn-success btn-sm">{{ button_label|default('Guardar') }}</button>
 {{ form_end(form) }}

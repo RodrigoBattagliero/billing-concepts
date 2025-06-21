@@ -1,38 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}ProductService{% endblock %}
+{% block title %}Concepto de facturación{% endblock %}
 
 {% block body %}
-    <h1>ProductService</h1>
+    <h1>Concepto de facturación</h1>
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ product_service.id }}</td>
+                <th>Tipo</th>
+                <td>
+                    {% if product_service.type == 'P' %}
+                        Producto
+                    {% else %}
+                        Servicio
+                    {% endif %}
+                </td>
             </tr>
             <tr>
-                <th>Type</th>
-                <td>{{ product_service.type }}</td>
+                <th>Categoria</th>
+                <td>{{ product_service.category.category }}</td>
             </tr>
             <tr>
-                <th>Code</th>
+                <th>Código</th>
                 <td>{{ product_service.code }}</td>
             </tr>
             <tr>
-                <th>ProductService</th>
+                <th>Producto/Servico</th>
                 <td>{{ product_service.productService }}</td>
             </tr>
             <tr>
-                <th>GrossPrice</th>
+                <th>Unidad de medida</th>
+                <td>{{ product_service.unitMeasurement.UnitOfMeasurement }}</td>
+            </tr>
+            <tr>
+                <th>IVA</th>
+                <td>{{ product_service.ivaApplication.ivaApplication }}</td>
+            </tr>
+            <tr>
+                <th>Precio</th>
                 <td>{{ product_service.grossPrice }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_product_service_index') }}">back to list</a>
+    <a href="{{ path('app_product_service_index') }}" class="btn btn-primary btn-sm">Volver al listado</a>
 
-    <a href="{{ path('app_product_service_edit', {'id': product_service.id}) }}">edit</a>
+    <a href="{{ path('app_product_service_edit', {'id': product_service.id}) }}" class="btn btn-secondary btn-sm">edit</a>
 
     {{ include('product_service/_delete_form.html.twig') }}
 {% endblock %}

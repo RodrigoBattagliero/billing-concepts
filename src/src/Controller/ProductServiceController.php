@@ -4,12 +4,14 @@ namespace App\Controller;
 
 use App\Entity\ProductService;
 use App\Form\ProductServiceForm;
-use App\Repository\ProductServiceRepository;
+use Symfony\Component\Form\FormError;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\ProductServiceRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/product-service')]
 final class ProductServiceController extends AbstractController
@@ -30,10 +32,17 @@ final class ProductServiceController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($productService);
-            $entityManager->flush();
+            try {
+                $entityManager->persist($productService);
+                $entityManager->flush();
 
-            return $this->redirectToRoute('app_product_service_index', [], Response::HTTP_SEE_OTHER);
+                $this->addFlash('success', 'Concepto de facturación creado correctamente.');
+
+                return $this->redirectToRoute('app_product_service_index', [], Response::HTTP_SEE_OTHER);
+            } catch (UniqueConstraintViolationException $e) {
+                $form->get('code')
+                    ->addError(new FormError('Este código ya está en uso. Por favor, elige otro.'));
+            }
         }
 
         return $this->render('product_service/new.html.twig', [
@@ -58,6 +67,7 @@ final class ProductServiceController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
+            $this->addFlash('success', 'Concepto de facturación editado correctamente.');
 
             return $this->redirectToRoute('app_product_service_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -74,6 +84,9 @@ final class ProductServiceController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$productService->getId(), $request->getPayload()->getString('_token'))) {
             $entityManager->remove($productService);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Concepto de facturación elimnado correctamente.');
+
         }
 
         return $this->redirectToRoute('app_product_service_index', [], Response::HTTP_SEE_OTHER);

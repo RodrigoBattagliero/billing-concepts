@@ -1,4 +1,5 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_row(form.code, {'label': 'Código'}) }}
+    {{ form_row(form.UnitOfMeasurement, {'label': 'Unidad de medida'}) }}
+    <button class="btn btn-success btn-sm">{{ button_label|default('Guardar') }}</button>
 {{ form_end(form) }}

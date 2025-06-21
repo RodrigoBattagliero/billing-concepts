@@ -21,23 +21,23 @@ class ProductServiceForm extends AbstractType
         $builder
             ->add('type', ChoiceType::class, [
                 'choices' => [
-                    ProductServiceType::P => ProductServiceType::P,
-                    ProductServiceType::S => ProductServiceType::S,
+                    'Producto' => ProductServiceType::P,
+                    'Servicio' => ProductServiceType::S,
                 ]
             ])
             ->add('category', EntityType::class, [
                 'class' => Category::class,
-                'choice_label' => 'id',
+                'choice_label' => 'category',
             ])
             ->add('code')
             ->add('productService')
             ->add('unitMeasurement', EntityType::class, [
                 'class' => UnitMeasurement::class,
-                'choice_label' => 'id',
+                'choice_label' => 'UnitOfMeasurement',
             ])
             ->add('ivaApplication', EntityType::class, [
                 'class' => IvaApplication::class,
-                'choice_label' => 'id',
+                'choice_label' => 'ivaApplication',
             ])
             ->add('grossPrice')
         ;

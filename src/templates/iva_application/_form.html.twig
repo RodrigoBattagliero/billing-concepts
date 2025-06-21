@@ -1,4 +1,6 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_row(form.code, {'label': 'Código'}) }}
+    {{ form_row(form.ivaApplication, {'label': 'Aplicación IVA'}) }}
+    {{ form_row(form.aliquot, {'label': 'Alícouta'}) }}
+    <button class="btn btn-success btn-sm">{{ button_label|default('Guardar') }}</button>
 {{ form_end(form) }}

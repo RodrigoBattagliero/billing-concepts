@@ -1,41 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}ProductService index{% endblock %}
+{% block title %}Conceptos de facturación{% endblock %}
 
 {% block body %}
-    <h1>ProductService index</h1>
+    <h1>Conceptos de facturación</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Type</th>
-                <th>Code</th>
-                <th>ProductService</th>
-                <th>GrossPrice</th>
-                <th>actions</th>
+                <th>Tipo</th>
+                <th>Código</th>
+                <th>Producto/Servicio</th>
+                <th>Precio</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
         {% for product_service in product_services %}
             <tr>
-                <td>{{ product_service.id }}</td>
-                <td>{{ product_service.type }}</td>
+                <td>
+                    {% if product_service.type == 'P'%}
+                        Producto
+                    {% else %}
+                        Servicio
+                    {% endif %}
+                </td>
                 <td>{{ product_service.code }}</td>
                 <td>{{ product_service.productService }}</td>
                 <td>{{ product_service.grossPrice }}</td>
                 <td>
-                    <a href="{{ path('app_product_service_show', {'id': product_service.id}) }}">show</a>
-                    <a href="{{ path('app_product_service_edit', {'id': product_service.id}) }}">edit</a>
+                    <a href="{{ path('app_product_service_show', {'id': product_service.id}) }}" class="btn btn-sm btn-info">Ver</a>
+                    <a href="{{ path('app_product_service_edit', {'id': product_service.id}) }}" class="btn btn-secondary btn-sm">Editar</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="6">No se encontraron registros</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_product_service_new') }}">Create new</a>
+    <a href="{{ path('app_product_service_new') }}" class="btn btn-primary btn-sm">Craer nuevo</a>
 {% endblock %}
