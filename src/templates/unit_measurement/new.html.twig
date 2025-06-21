@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New UnitMeasurement{% endblock %}
+
+{% block body %}
+    <h1>Create new UnitMeasurement</h1>
+
+    {{ include('unit_measurement/_form.html.twig') }}
+
+    <a href="{{ path('app_unit_measurement_index') }}">back to list</a>
+{% endblock %}
