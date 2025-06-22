@@ -5,7 +5,7 @@
 1. Clone the project `git clone https://github.com/RodrigoBattagliero/billing-concepts.git`
 2. Run `cd billing-concepts`
 3. Run `chmod +x setup.sh`
-4. Run `setup.sh`
+4. Run `sh setup.sh`
 
 # Usage
 
