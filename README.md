@@ -1,6 +1,6 @@
 # Setup
 
-**To correct instalation, you must have npm installed in you local machine.**
+> **Note:** To correct installation, you must have **npm installed** in you local machine.
 
 1. Clone the project `git clone https://github.com/RodrigoBattagliero/billing-concepts.git`
 2. Run `cd billing-concepts`
