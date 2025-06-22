@@ -1,5 +1,5 @@
 # Before installation
-In order to permform a correct installation, you must have installed the following in your local machine: 
+In order to perform a correct installation, you must have installed the following in your local machine: 
 
 1. docker
 2. npm
