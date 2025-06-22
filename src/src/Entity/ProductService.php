@@ -34,7 +34,7 @@ class ProductService
     private ?IvaApplication $ivaApplication = null;
 
     #[ORM\Column(nullable: true)]
-    private ?float $grossPrice = null;
+    private ?float $grossPrice = 0;
 
     public function getId(): ?int
     {
