@@ -27,7 +27,7 @@ final class Version20250621185933 extends AbstractMigration
             CREATE TABLE iva_application (id SERIAL NOT NULL, code INT NOT NULL, iva_application VARCHAR(50) NOT NULL, aliquot DOUBLE PRECISION DEFAULT NULL, PRIMARY KEY(id))
         SQL);
         $this->addSql(<<<'SQL'
-            CREATE TABLE product_service (id SERIAL NOT NULL, category_id INT DEFAULT NULL, unit_measurement_id INT DEFAULT NULL, iva_application_id INT DEFAULT NULL, type VARCHAR(1) NOT NULL, code VARCHAR(20) NOT NULL, product_service VARCHAR(255) NOT NULL, gross_price DOUBLE PRECISION DEFAULT NULL, PRIMARY KEY(id))
+            CREATE TABLE product_service (id SERIAL NOT NULL, category_id INT DEFAULT NULL, unit_measurement_id INT DEFAULT NULL, iva_application_id INT DEFAULT NULL, type VARCHAR(1) NOT NULL, code VARCHAR(20) NOT NULL, product_service VARCHAR(255) NOT NULL, gross_price DOUBLE PRECISION DEFAULT 0, PRIMARY KEY(id))
         SQL);
         $this->addSql(<<<'SQL'
             CREATE UNIQUE INDEX UNIQ_3044816277153098 ON product_service (code)
