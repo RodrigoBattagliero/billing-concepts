@@ -4,13 +4,8 @@
 
 1. Clone the project `git clone https://github.com/RodrigoBattagliero/billing-concepts.git`
 2. Run `cd billing-concepts`
-3. Run `npm install`
-4. Run `npm run build`
-5. Run `docker compose up -d`
-6. Enter php container `docker compose exec php sh`
-7. Install dependencies `composer install`
-8. Run migrations `php bin/console doctrine:migrations:migrate`
-
+3. Run `chmod +x setup.sh`
+4. Run `setup.sh`
 
 # Usage
 
