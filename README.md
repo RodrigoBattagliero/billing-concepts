@@ -1,6 +1,6 @@
 # Setup
 
-1. Clone the project `git clone `
+1. Clone the project `git clone https://github.com/RodrigoBattagliero/billing-concepts.git`
 2. Run `cd billing-concepts`
 3. Run `docker compose up -d`
 4. Enter php container `docker compose exec php sh`
