@@ -1,6 +1,10 @@
-# Setup
+# Before installation
+In order to permform a correct installation, you must have installed the following in your local machine: 
 
-> **Note:** To correct installation, you must have **npm installed** in you local machine.
+1. docker
+2. npm
+
+# Setup
 
 1. Clone the project `git clone https://github.com/RodrigoBattagliero/billing-concepts.git`
 2. Run `cd billing-concepts`
